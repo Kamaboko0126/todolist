@@ -21,15 +21,21 @@
         </div>
 
         <div class="card" v-for="todo in activeTodos" :key="todo.id">
-          <div class="state state-todo" @click="markAsDone(todo)">
-            <div
-              class="circle circle-todo"
-              :class="{ checked: todo.state === 'done' }"
-            >
-              <span class="checkmark checkmark-todo">&#10003;</span>
+          <div class="card-top">
+            <div class="state state-todo" @click="markAsDone(todo)">
+              <div
+                class="circle circle-todo"
+                :class="{ checked: todo.state === 'done' }"
+              >
+                <span class="checkmark checkmark-todo">&#10003;</span>
+              </div>
+              <div class="todo-btn">
+                <p>{{ todo.state === "todo" ? "待辦事項" : "已完成" }}</p>
+              </div>
             </div>
-            <div class="todo-btn">
-              <p>{{ todo.state === "todo" ? "待辦事項" : "已完成" }}</p>
+
+            <div class="del-content" @click="removeTodo">
+              <i class="material-icons">delete</i>
             </div>
           </div>
           <p>項目: {{ todo.title }}</p>
@@ -44,17 +50,24 @@
       </div>
       <div class="cards cards-done">
         <div class="card" v-for="todo in dones" :key="todo.id">
-          <div class="state state-done" @click="markAsTodo(todo)">
-            <div
-              class="circle circle-done"
-              :class="{ checked: todo.state === 'done' }"
-            >
-              <span class="checkmark checkmark-done">&#10003;</span>
+          <div class="card-top">
+            <div class="state state-done" @click="markAsTodo(todo)">
+              <div
+                class="circle circle-done"
+                :class="{ checked: todo.state === 'done' }"
+              >
+                <span class="checkmark checkmark-done">&#10003;</span>
+              </div>
+              <div class="done-btn">
+                <p>{{ todo.state === "todo" ? "待辦事項" : "已完成" }}</p>
+              </div>
             </div>
-            <div class="done-btn">
-              <p>{{ todo.state === "todo" ? "待辦事項" : "已完成" }}</p>
+
+            <div class="del-content" @click="removeTodo">
+              <i class="material-icons">delete</i>
             </div>
           </div>
+
           <p>項目: {{ todo.title }}</p>
           <p>期限: {{ todo.deadline }}</p>
         </div>
@@ -202,6 +215,13 @@ export default {
   margin-top: 15px;
 }
 
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 button {
   background-color: #8c6961;
   border: none;
@@ -237,15 +257,17 @@ input[type="text"] {
   align-items: center;
 }
 
-.todo-btn,.done-btn {
+.todo-btn,
+.done-btn {
   padding: 4px 6px;
   font-size: 13px;
-  background: #333333;
+  background: #444;
   color: #fff;
   margin-bottom: 5px;
+  transition: background 0.3s ease-in-out;
 }
 
-.done-btn{
+.done-btn {
   background: #28a745;
 }
 
@@ -284,6 +306,14 @@ input[type="text"] {
   display: block;
 }
 
+.state-todo:hover .todo-btn {
+  background: #111;
+}
+
+.state-done:hover .done-btn{
+  background: #178f33;
+}
+
 .state-done:hover .checkmark {
   display: none;
 }
@@ -292,5 +322,15 @@ input[type="text"] {
   color: #a82230;
   font-size: 12px;
   font-weight: bold;
+}
+.del-content i {
+  color: #a82230;
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.del-content:hover i {
+  color: #970b19;
 }
 </style>
