@@ -51,7 +51,7 @@
             >
               <span class="checkmark checkmark-done">&#10003;</span>
             </div>
-            <div class="todo-btn">
+            <div class="done-btn">
               <p>{{ todo.state === "todo" ? "待辦事項" : "已完成" }}</p>
             </div>
           </div>
@@ -237,12 +237,16 @@ input[type="text"] {
   align-items: center;
 }
 
-.todo-btn {
+.todo-btn,.done-btn {
   padding: 4px 6px;
   font-size: 13px;
   background: #333333;
   color: #fff;
   margin-bottom: 5px;
+}
+
+.done-btn{
+  background: #28a745;
 }
 
 .state {

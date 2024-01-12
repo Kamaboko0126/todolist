@@ -1,7 +1,7 @@
 <template>
   <HeaderItem />
   <div class="content">
-    <div class="left">aaaaa</div>
+    <div class="left"></div>
     <TodoList />
   </div>
 </template>
